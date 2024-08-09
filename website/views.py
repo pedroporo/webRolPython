@@ -1,7 +1,7 @@
-from flask import Blueprint
+from flask import Blueprint,render_template
 
 vistas=Blueprint('vistas',__name__)
 
 @vistas.route('/')
 def home():
-    return "<h1>Hola Pedro!</h1>"
+    return render_template("home.html")
