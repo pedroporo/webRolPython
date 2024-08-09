@@ -36,13 +36,40 @@
       <div class="collapse navbar-collapse" id="navbar">
         <div class="navbar-nav">
           <a href="/" id="home" class="nav-item nav-link">Home</a>
-          <a href="/logout" id="logout" class="nav-item nav-link"
-            >Cerrar Sesion</a
-          >
-          <a href="/login" id="login" class="nav-item nav-link">Logearse</a>
+
+          {% if not user %}
+          <a href="/login" id="login" class="nav-item nav-link">
+            Iniciar Sesion
+          </a>
+          <a class="position-absolute end-0 nav-item nav-link" id="profile">
+            <img
+              src="https://i.imgur.com/SaqRzfU.png"
+              alt="Dicord logo"
+              width="40"
+              height="40"
+              class="top-0 rounded-circle mt-n3"
+            />
+            Visitante
+          </a>
+          {% else %}
+          <a href="/logout" id="logout" class="nav-item nav-link">
+            Cerrar Sesion
+          </a>
+          <a class="position-absolute end-0 nav-item nav-link" id="profile">
+            <img
+              src="https://cdn.discordapp.com/avatars/{{user.id}}/{{user.avatar}}"
+              alt="Dicord logo"
+              width="40"
+              height="40"
+              class="top-0 rounded-circle mt-n3"
+            />
+            {{user.username}}
+          </a>
+          {% endif %}
         </div>
       </div>
     </nav>
+    <div class="container">{% block content %} {% endblock %}</div>
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
