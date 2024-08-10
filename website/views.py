@@ -13,19 +13,22 @@ def home():
 @vistas.route('/hechizos')
 def hechizos():
     user_details_json=request.cookies.get('user_details_json')
-
     user_details = json.loads(user_details_json)
-    return render_template("hechizos.html",user=user_details)
+    hechizos=HechizoSQLDao.findAll(self=HechizoSQLDao)
+    return render_template("hechizos.html",user=user_details,hechizos=hechizos)
 
 @vistas.route('/hechizosAdd' , methods=['GET', 'POST'])
 def hechizosAdd():
+    #print(len(HechizoSQLDao.findAll(self=HechizoSQLDao)))
+    #for documento in HechizoSQLDao.hechizosDB.find({}):
+    #        print(documento)
     if request.method == 'POST':
         nombre_hechizo=request.form['Nombre_Hechizo']
         accion=request.form['Accion']
         escuela=request.form['Escuela']
         descripcion_hechizo=request.form['Descripcion_Hechizo']
-        magia=Hechizo(nombre=nombre_hechizo,accion=accion,descripcion=descripcion_hechizo,escuela=escuela)
-
+        magia=Hechizo(id=len(HechizoSQLDao.findAll(self=HechizoSQLDao))+1,nombre=nombre_hechizo,accion=accion,descripcion=descripcion_hechizo,escuela=escuela)
+        
         nombreDificultadBase=request.form['Nombre_Dificultad_Base']
         costeBasico=request.form['Coste_Basico']
         descripcionDificultadBase=request.form['Descripcion_dificultad_Base']
@@ -58,9 +61,12 @@ def hechizosAdd():
             nivelAvanzado.addDaño(daño=dañoAvanzado)
         if dificultadAvanzada != '':
             nivelAvanzado.addDificultad(dificultad=dificultadAvanzada)
-        magia.addDificultad(dificultad=dificultadBasica)
-        magia.addDificultad(dificultad=dificultadMediana)
-        magia.addDificultad(dificultad=dificultadAvanzada)
+        print(nivelBasico)
+        magia.addDificultad(dificultad=nivelBasico)
+        magia.addDificultad(dificultad=nivelMediana)
+        magia.addDificultad(dificultad=nivelAvanzado)
+        
+        HechizoSQLDao.add(self=HechizoSQLDao,hechizo=magia,dif1=nivelBasico,dif2=nivelMediana,dif3=nivelAvanzado)
         
 
     user_details_json=request.cookies.get('user_details_json')

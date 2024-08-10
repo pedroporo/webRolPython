@@ -3,4 +3,21 @@ content%}
 <p>
   <a href="/hechizosAdd" class="btn btn-primary" role="link"> Crear Hechizo </a>
 </p>
-{% endblock %}
+{% for linea in hechizos | batch(4) %}
+<tr>
+  <div class="row">
+    {% for hechizo in linea %}
+    <div
+      class="container-sm col rounded border border-1 shadow-lg hechizo-container"
+    >
+      <div class="row">
+        <div class="col align-top">{{hechizo.nombre}}</div>
+        <div class="vr"></div>
+        <div class="col">{{hechizo.accion.value}}</div>
+        <div class="col border-top align-down">Test</div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</tr>
+{% endfor %} {% endblock %}
