@@ -1,5 +1,5 @@
 from flask import Flask
-from pymongo import MongoClient
+from website.MongoDB import get_connection
 
 def create_app():
     app = Flask(__name__)

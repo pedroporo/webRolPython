@@ -1,0 +1,222 @@
+{% extends 'base.html'%}{% block title %}Creacion de Hechizos{% endblock %}
+{%block content%}
+<form action="/hechizosAdd" method="post">
+  <div class="row" id="hechizo">
+    <a>Hechizo</a>
+    <div class="mb-3 col">
+      <label for="inputName" class="form-label">Nombre del Hechizo</label>
+      <input
+        type="text"
+        class="form-control"
+        id="inputName"
+        name="Nombre_Hechizo"
+      />
+    </div>
+    <div class="mb-3 col">
+      <label for="inputName" class="form-label">Tipo de accion</label>
+      <select
+        class="form-select"
+        aria-label="Seleccion del tipo de accion"
+        name="Accion"
+      >
+        {% for accion in acciones %}
+        <option value="{{ accion.name }}">{{ accion.value }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="mb-3 col">
+      <label for="inputName" class="form-label">Escuela</label>
+      <select
+        class="form-select"
+        aria-label="Selecciona la escuela"
+        name="Escuela"
+      >
+        {% for escuela in escuelas %}
+        <option value="{{ escuela.name }}">{{ escuela.value }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="row">
+      <div class="mb-3 col">
+        <label for="descripcion" class="form-label">Descripcion</label>
+        <textarea
+          class="form-control"
+          id="descripcion"
+          name="Descripcion_Hechizo"
+          rows="4"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" id="niveles">
+    <a>Niveles de Hechizos</a>
+    <div class="mb-3 col" id="basico">
+      <div class="row">
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Base"
+          value="Base"
+          name="Nombre_Dificultad_Base"
+          aria-label="Nivel base de hechizo"
+          readonly
+        />
+      </div>
+      <div class="row">
+        <div class="col">
+          <label for="coste" class="form-label">Coste Hechizo</label>
+          <input
+            class="form-control"
+            type="number"
+            name="Coste_Basico"
+            id="coste"
+          />
+        </div>
+        <div class="col">
+          <label for="daño" class="form-label">Daño(Opcional)</label>
+          <input
+            class="form-control"
+            type="text"
+            placeholder="2d10+1"
+            name="Daño_Basico"
+            aria-label="Nivel base de hechizo"
+          />
+        </div>
+        <div class="col">
+          <label for="daño" class="form-label">Dificultad(Opcional)</label>
+          <input
+            class="form-control"
+            type="number"
+            name="Dificultad_Basica"
+            placeholder="23"
+            aria-label="Nivel base de hechizo"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="mb-3 col">
+          <label for="descripcion_basic" class="form-label">Descripcion</label>
+          <textarea
+            class="form-control"
+            id="descripcion"
+            name="Descripcion_dificultad_Base"
+            rows="4"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="mb-3 col" id="alzado">
+      <div class="row">
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Alzado"
+          value="Alzado"
+          name="Nombre_Dificultad_Alzado"
+          aria-label="Nivel Medio de hechizo"
+          readonly
+        />
+      </div>
+      <div class="row">
+        <div class="col">
+          <label for="coste" class="form-label">Coste Hechizo</label>
+          <input
+            class="form-control"
+            type="number"
+            name="Coste_Mediano"
+            id="coste"
+          />
+        </div>
+        <div class="col">
+          <label for="daño" class="form-label">Daño(Opcional)</label>
+          <input
+            class="form-control"
+            type="text"
+            name="Daño_Mediano"
+            placeholder="2d10+1"
+            aria-label="Nivel base de hechizo"
+          />
+        </div>
+        <div class="col">
+          <label for="daño" class="form-label">Dificultad(Opcional)</label>
+          <input
+            class="form-control"
+            type="number"
+            placeholder="23"
+            name="Dificultad_Mediana"
+            aria-label="Nivel base de hechizo"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="mb-3 col">
+          <label for="descripcion_med" class="form-label">Descripcion</label>
+          <textarea
+            class="form-control"
+            id="descripcion"
+            name="Descripcion_dificultad_Mediana"
+            rows="4"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="mb-3 col" id="arcano">
+      <div class="row">
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Arcano"
+          value="Arcano"
+          name="Nombre_Dificultad_Arcano"
+          aria-label="Nivel Avanzado de hechizo"
+          readonly
+        />
+      </div>
+      <div class="row">
+        <div class="col">
+          <label for="coste" class="form-label">Coste Hechizo</label>
+          <input
+            class="form-control"
+            type="number"
+            name="Coste_Avanzado"
+            id="coste"
+          />
+        </div>
+        <div class="col">
+          <label for="daño" class="form-label">Daño(Opcional)</label>
+          <input
+            class="form-control"
+            type="text"
+            placeholder="2d10+1"
+            name="Daño_Avanzado"
+            aria-label="Nivel avanzado de hechizo"
+          />
+        </div>
+        <div class="col">
+          <label for="daño" class="form-label">Dificultad(Opcional)</label>
+          <input
+            class="form-control"
+            type="number"
+            placeholder="23"
+            name="Dificultad_Avanzada"
+            aria-label="Nivel base de hechizo"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="mb-3 col">
+          <label for="descripcion_av" class="form-label">Descripcion</label>
+          <textarea
+            class="form-control"
+            id="descripcion"
+            name="Descripcion_dificultad_Avanzada"
+            rows="4"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

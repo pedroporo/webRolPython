@@ -52,7 +52,7 @@ def login():
 @auth.route('/callback')
 def callback():
     if request.values.get('error'):
-        return request.values['error']
+        return redirect('/')
     discord = create_session(state=session.get('oauth2_state'))
     token = discord.fetch_token(
         TOKEN_URL,
